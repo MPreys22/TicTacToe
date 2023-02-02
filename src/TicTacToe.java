@@ -32,6 +32,8 @@ public class TicTacToe
     private int winIndex;       // Provides the index of the row/col of the win
     private int turn;
 
+    private TicTacToeViewer window;
+
     private Square[][] board;
     private boolean isGameOver;
 
@@ -46,7 +48,7 @@ public class TicTacToe
         this.board = new Square[3][3];
         for(int row = 0; row < this.board.length; row++) {
             for(int col = 0; col< this.board[row].length; col++) {
-                this.board[row][col] = new Square(row, col);
+                this.board[row][col] = new Square(row, col, window);
             }
         }
 
@@ -56,6 +58,7 @@ public class TicTacToe
         this.winner = BLANK;
         this.winIndex = -1;
         this.winDirection = -1;
+        this.window = new TicTacToeViewer(this);
     }
 
     /******************** Methods You May Find Helpful ********************/
@@ -137,6 +140,7 @@ public class TicTacToe
                 System.out.println("X Wins!");
             }
         }
+        window.repaint();
     }
 
 
@@ -154,6 +158,7 @@ public class TicTacToe
             this.board[row][col].setMarker(O_MARKER);
         }
         this.turn++;
+        window.repaint();
     }
 
     /**
